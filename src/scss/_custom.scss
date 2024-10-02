@@ -22,6 +22,10 @@ body {
     flex-direction: column;
     flex: 1 0 auto;
 
+    router-outlet {
+      flex: 0;
+    }
+
     > * {
       flex: 1;
       display: flex;

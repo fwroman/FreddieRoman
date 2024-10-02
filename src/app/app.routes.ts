@@ -1,26 +1,30 @@
 import { Routes } from '@angular/router';
-import { ProductListComponent } from './components/product-list/product-list.component';
-import { CreateProductComponent } from './components/create-product/create-product.component';
-import { UpdateProductComponent } from './components/update-product/update-product.component';
 
 export const routes: Routes = [
   {
     path: 'product-list',
-    component: ProductListComponent,
-    pathMatch: 'full',
+    loadComponent: () =>
+      import('./components/product-list/product-list.component').then(
+        (m) => m.ProductListComponent
+      ),
   },
   {
     path: 'create-product',
-    component: CreateProductComponent,
-    pathMatch: 'full',
+    loadComponent: () =>
+      import('./components/create-product/create-product.component').then(
+        (m) => m.CreateProductComponent
+      ),
   },
   {
     path: 'update-product',
-    component: UpdateProductComponent,
-    pathMatch: 'full',
+    loadComponent: () =>
+      import('./components/update-product/update-product.component').then(
+        (m) => m.UpdateProductComponent
+      ),
   },
   {
-    path: '/',
-    redirectTo: '/product-list',
+    path: '',
+    redirectTo: 'product-list',
+    pathMatch: 'full',
   },
 ];
