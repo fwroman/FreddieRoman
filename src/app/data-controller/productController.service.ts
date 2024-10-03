@@ -63,8 +63,8 @@ export class ProductControllerService {
       name: product.name,
       description: product.description,
       logo: product.logo,
-      date_release: product.releaseDate,
-      date_revision: product.revisionDate,
+      date_release: product.releaseDate!,
+      date_revision: product.revisionDate!,
     } satisfies ApiProduct;
 
     return apiProd;
@@ -81,8 +81,8 @@ export class ProductControllerService {
       apiProduct.name,
       apiProduct.description,
       apiProduct.logo,
-      new Date(apiProduct.date_release),
-      new Date(apiProduct.date_revision)
+      apiProduct.date_release,
+      apiProduct.date_revision
     );
   }
 }

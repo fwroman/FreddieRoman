@@ -11,7 +11,26 @@ import { ProductFormComponent } from '../generic/product-form/product-form.compo
   styleUrl: './create-product.component.scss',
 })
 export class CreateProductComponent implements AfterViewInit {
-  constructor(private productService: ProductService) {}
+  public product!: FinancialProduct;
+  public resetProduct: boolean | undefined;
+
+  constructor(private productService: ProductService) {
+    this.product = new FinancialProduct('', '', '', '');
+  }
+
+  /** Submits the form to create a new product. */
+  public async submit(_event: boolean) {
+    await this.productService.createProducts(this.product);
+    this.resetForm();
+  }
+
+  /** Sends the child component the updated flag to reset the form. */
+  resetForm() {
+    this.resetProduct = undefined;
+    setTimeout(() => {
+      this.resetProduct = true;
+    });
+  }
 
   ngAfterViewInit(): void {}
 }

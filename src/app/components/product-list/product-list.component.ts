@@ -28,13 +28,18 @@ export class ProductListComponent implements OnInit {
     this.productList = await this.productService.listProducts();
   }
 
+  /** Calls the Subject to send a product to the update product view. */
+  public sendProduct(product: FinancialProduct): void {
+    this.genericSubjectService.sendProductToUpdate(product);
+  }
+
   /** Shows or hides the delete modal. */
-  public showHideDeleteModal(show: boolean) {
+  public showHideDeleteModal(show: boolean): void {
     this.genericSubjectService.showHideModal(show);
   }
 
   /** Hides the context menu that has the options for editing and removing a product. */
-  public hideContextMenu(product: Product) {
+  public hideContextMenu(product: Product): void {
     setTimeout(() => {
       product.showContextualMenu = false;
     }, 100);

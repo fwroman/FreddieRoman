@@ -1,1 +1,7 @@
-<div product-form class="f-form"></div>
+<div
+  product-form
+  [product]="product"
+  [resetProduct]="resetProduct"
+  (isProductFilledIn)="submit($event)"
+  class="f-form"
+></div>

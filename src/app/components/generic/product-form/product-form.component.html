@@ -1,41 +1,132 @@
 <div class="f-form__wrapper">
-  <h1>Formulario de {{ !update ? "Registro" : " Edición" }}</h1>
+  <h1>Formulario de {{ product.isNewRecord ? "Registro" : " Edición" }}</h1>
   <hr width="98%" />
 
-  <div class="f-form__body">
+  <form #prodForm="ngForm" class="f-form__body">
     <div class="f-form__control">
       <label>ID</label>
-      <input type="text" class="f-generic-input" />
+      <input
+        type="text"
+        minlength="3"
+        maxlength="10"
+        autocomplete="off"
+        class="f-generic-input"
+        [(ngModel)]="product.id"
+        name="id"
+        #id="ngModel"
+        [disabled]="product.isNewRecord == false"
+        required
+      />
+
+      <span *ngIf="id.touched && id.invalid" class="f-form__input-error">
+        ID no válido!
+      </span>
     </div>
 
     <div class="f-form__control">
-      <label>Name</label>
-      <input type="text" class="f-generic-input" />
+      <label>Nombre</label>
+      <input
+        type="text"
+        minlength="5"
+        maxlength="100"
+        autocomplete="off"
+        class="f-generic-input"
+        [(ngModel)]="product.name"
+        name="name"
+        #name="ngModel"
+        required
+      />
+
+      <span *ngIf="name.touched && name.invalid" class="f-form__input-error">
+        Nombre no válido!
+      </span>
     </div>
 
     <div class="f-form__control">
       <label>Descripción</label>
-      <input type="text" class="f-generic-input" />
+      <input
+        type="text"
+        minlength="10"
+        maxlength="200"
+        autocomplete="off"
+        class="f-generic-input"
+        [(ngModel)]="product.description"
+        name="description"
+        #description="ngModel"
+        required
+      />
+
+      <span
+        *ngIf="description.touched && description.invalid"
+        class="f-form__input-error"
+      >
+        Descripción no válida!
+      </span>
     </div>
 
     <div class="f-form__control">
       <label>Logo</label>
-      <input type="text" class="f-generic-input" />
+      <input
+        type="text"
+        autocomplete="off"
+        class="f-generic-input"
+        [(ngModel)]="product.logo"
+        name="logo"
+        #logo="ngModel"
+        required
+      />
+
+      <span *ngIf="logo.touched && logo.invalid" class="f-form__input-error">
+        Logo no válido!
+      </span>
     </div>
 
     <div class="f-form__control">
-      <label>Fecha liberación</label>
-      <input type="text" class="f-generic-input" />
+      <label>Fecha Liberación</label>
+      <input
+        type="date"
+        [min]="minDate"
+        autocomplete="off"
+        class="f-generic-input"
+        [(ngModel)]="product.releaseDate"
+        name="releaseDate"
+        required
+        #releaseDate="ngModel"
+        (change)="setRevisionDate()"
+      />
+
+      <span
+        *ngIf="releaseDate.touched && releaseDate.invalid"
+        class="f-form__input-error"
+      >
+        Fecha Liberación no válida!
+      </span>
     </div>
 
     <div class="f-form__control">
       <label>Fecha Revisión</label>
-      <input type="text" class="f-generic-input" />
+      <input
+        type="date"
+        class="f-generic-input"
+        [(ngModel)]="product.revisionDate"
+        name="revisionDate"
+        required
+        disabled
+      />
     </div>
-  </div>
+  </form>
 
   <div class="f-form__button-group">
-    <button class="f-brand-btn f-brand-btn--secondary">Reiniciar</button>
-    <button class="f-brand-btn">Enviar</button>
+    <button class="f-brand-btn f-brand-btn--secondary" (click)="resetForm()">
+      Reiniciar
+    </button>
+    <button
+      class="f-brand-btn"
+      [disabled]="prodForm.invalid"
+      (click)="sendProduct()"
+    >
+      <div m-icon [iconName]="'check.svg'"></div>
+      Enviar
+    </button>
   </div>
 </div>

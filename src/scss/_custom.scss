@@ -107,16 +107,25 @@ a {
 
   &__logo {
     color: $brand-color;
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 1rem;
+
+    @media (min-width: $sm) {
+      font-size: 1.7rem;
+    }
+
+    @media (min-width: $md) {
+      font-size: 1.55rem;
+    }
   }
 
   &__logo-icon {
     display: flex;
     align-items: center;
+    color: $brand-color-secondary;
 
     .m-icon svg {
       width: 1.75em;
@@ -128,25 +137,51 @@ a {
 .f-brand-btn {
   border: none;
   width: 110px;
-  height: 25px;
+  height: 28px;
   background-color: $brand-background-color;
   font-weight: 600;
   font-size: 10px;
   border-radius: 5px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  color: $brand-color;
 
   &:active,
   &:focus {
     outline: 0.14rem solid $brand-color;
   }
 
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    outline: none;
+  }
+
   &--secondary {
     background-color: $brand-background-color-sec;
   }
 
+  .m-icon svg {
+    width: 1.2em;
+    height: 1.2em;
+
+    @media (min-width: $sm) {
+      width: 1.3em;
+      height: 1.3em;
+    }
+
+    @media (min-width: $md) {
+      width: 1.4em;
+      height: 1.4em;
+    }
+  }
+
   @media (min-width: $sm) {
     width: 115px;
-    height: 30px;
+    height: 33px;
     font-size: 11px;
   }
 
@@ -164,6 +199,7 @@ a {
   cursor: pointer;
   border-radius: 50%;
   background-color: transparent;
+  color: $generic-font-color;
 
   &:active,
   &:focus {
@@ -213,6 +249,19 @@ a {
   }
 }
 
+.f-generic-input.ng-touched.ng-valid[required],
+.f-generic-input.ng-touched.ng-valid.required {
+  border-color: $success-color;
+}
+
+.f-generic-input.ng-touched.ng-invalid:not(form) {
+  border-color: $error-color;
+
+  .f-form__input-error {
+    display: flex;
+  }
+}
+
 .f-form__control {
   display: flex;
   flex-direction: column;
@@ -249,10 +298,13 @@ a {
 
   &__item {
     transition: all 0.3s ease;
-    padding: 0.3rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     border-bottom: 1px solid $generic-border-color;
     cursor: pointer;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
 
     &:hover {
       background-color: $generic-background-color;
@@ -260,6 +312,13 @@ a {
 
     &:last-child {
       border-bottom: transparent;
+    }
+  }
+
+  &__icon {
+    .m-icon svg {
+      width: 1.3em;
+      height: 1.3em;
     }
   }
 }
@@ -410,6 +469,10 @@ a {
     background-color: $generic-background-color;
   }
 
+  &__item-img {
+    width: 20px;
+  }
+
   &__footer {
     display: flex;
     justify-content: space-between;
@@ -428,6 +491,18 @@ a {
     flex-direction: column;
     background-color: #fff;
 
+    @media (min-width: $md) {
+      width: 50vw;
+    }
+
+    @media (min-width: $lg) {
+      width: 45vw;
+    }
+
+    @media (min-width: $xl) {
+      width: 40vw;
+    }
+
     h1 {
       text-align: center;
     }
@@ -439,25 +514,32 @@ a {
     grid-template-columns: auto;
     grid-row-gap: 1.75rem;
 
-    .f-form__control {
-      .f-generic-input {
-        width: 100%;
-      }
-    }
-
     @media (min-width: $sm) {
       grid-template-columns: auto auto;
       grid-column-gap: 2.5rem;
-
-      .f-form__control {
-        .f-generic-input {
-          width: inherit;
-        }
-      }
     }
 
     @media (min-width: $md) {
       grid-column-gap: 2.5rem;
+    }
+  }
+
+  &__control {
+    .f-generic-input {
+      width: 100%;
+
+      @media (min-width: $sm) {
+        width: inherit;
+      }
+    }
+  }
+
+  &__input-error {
+    color: $error-color;
+    font-size: 1rem;
+
+    @media (min-width: $md) {
+      font-size: 0.8rem;
     }
   }
 

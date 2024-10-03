@@ -3,6 +3,7 @@
     <input type="text" class="f-generic-input" placeholder="search..." />
 
     <button class="f-brand-btn" [routerLink]="'/create-product'">
+      <div m-icon [iconName]="'add.svg'"></div>
       Agregar
     </button>
   </div>
@@ -17,7 +18,9 @@
       <div class="f-list__h-item"></div>
 
       <ng-container *ngFor="let product of productList">
-        <div class="f-list__item">{{ product.logo }}</div>
+        <div class="f-list__item">
+          <img [src]="product.logo" class="f-list__item-img" />
+        </div>
         <div class="f-list__item">{{ product.name }}</div>
         <div class="f-list__item">{{ product.description }}</div>
         <div class="f-list__item">{{ product.releaseDate }}</div>
@@ -43,13 +46,27 @@
               'f-contextual-menu--show': product.isContextMenuShown
             }"
           >
-            <a class="f-contextual-menu__item" [routerLink]="'/update-product'">
+            <a
+              class="f-contextual-menu__item"
+              [routerLink]="'/update-product'"
+              (click)="sendProduct(product)"
+            >
+              <div
+                m-icon
+                [iconName]="'edit.svg'"
+                class="f-contextual-menu__icon"
+              ></div>
               Editar
             </a>
             <div
               class="f-contextual-menu__item"
               (click)="selectedProduct = product; showHideDeleteModal(true)"
             >
+              <div
+                m-icon
+                [iconName]="'delete.svg'"
+                class="f-contextual-menu__icon"
+              ></div>
               Eliminar
             </div>
           </div>
@@ -57,57 +74,67 @@
       </ng-container>
     </div>
 
-    <div class="f-list__body f-list__body--mobile">
-      <ng-container *ngFor="let product of productList">
-        <div class="f-list__h-item">Logo</div>
-        <div class="f-list__item">{{ product.logo }}</div>
+    <div
+      *ngFor="let product of productList"
+      class="f-list__body f-list__body--mobile"
+    >
+      <div class="f-list__h-item">Logo</div>
 
-        <div class="f-list__h-item">Nombre del Producto</div>
-        <div class="f-list__item">{{ product.name }}</div>
+      <div class="f-list__item">
+        <img [src]="product.logo" class="f-list__item-img" />
+      </div>
 
-        <div class="f-list__h-item">Descripción</div>
-        <div class="f-list__item">{{ product.description }}</div>
+      <div class="f-list__h-item">Nombre del Producto</div>
+      <div class="f-list__item">{{ product.name }}</div>
 
-        <div class="f-list__h-item">Fecha de liberación</div>
-        <div class="f-list__item">{{ product.releaseDate }}</div>
+      <div class="f-list__h-item">Descripción</div>
+      <div class="f-list__item">{{ product.description }}</div>
 
-        <div class="f-list__h-item">Fecha de reestructuración</div>
-        <div class="f-list__item">
-          {{ product.revisionDate }}
-        </div>
+      <div class="f-list__h-item">Fecha de liberación</div>
+      <div class="f-list__item">{{ product.releaseDate }}</div>
 
-        <div class="f-list__h-item"></div>
-        <div class="f-list__item f-list__item--icon">
-          <button
-            class="f-icon-btn"
-            (click)="product.showContextualMenu = true"
-            (blur)="hideContextMenu(product)"
+      <div class="f-list__h-item">Fecha de reestructuración</div>
+      <div class="f-list__item">
+        {{ product.revisionDate }}
+      </div>
+
+      <div class="f-list__h-item"></div>
+      <div class="f-list__item f-list__item--icon">
+        <button
+          class="f-icon-btn"
+          (click)="product.showContextualMenu = true"
+          (blur)="hideContextMenu(product)"
+        >
+          <div m-icon [iconName]="'options.svg'" class="f-icon-btn__icon"></div>
+        </button>
+
+        <div
+          class="f-contextual-menu"
+          [ngClass]="{
+            'f-contextual-menu--show': product.isContextMenuShown
+          }"
+        >
+          <a class="f-contextual-menu__item" [routerLink]="'/update-product'">
+            <div
+              m-icon
+              [iconName]="'edit.svg'"
+              class="f-contextual-menu__icon"
+            ></div>
+            Editar
+          </a>
+          <div
+            class="f-contextual-menu__item"
+            (click)="selectedProduct = product; showHideDeleteModal(true)"
           >
             <div
               m-icon
-              [iconName]="'options.svg'"
-              class="f-icon-btn__icon"
+              [iconName]="'delete.svg'"
+              class="f-contextual-menu__icon"
             ></div>
-          </button>
-
-          <div
-            class="f-contextual-menu"
-            [ngClass]="{
-              'f-contextual-menu--show': product.isContextMenuShown
-            }"
-          >
-            <a class="f-contextual-menu__item" [routerLink]="'/update-product'">
-              Editar
-            </a>
-            <div
-              class="f-contextual-menu__item"
-              (click)="selectedProduct = product; showHideDeleteModal(true)"
-            >
-              Eliminar
-            </div>
+            Eliminar
           </div>
         </div>
-      </ng-container>
+      </div>
     </div>
 
     <div class="f-list__footer">
@@ -142,7 +169,10 @@
       >
         Cancelar
       </button>
-      <button class="f-brand-btn">Confirmar</button>
+      <button class="f-brand-btn">
+        <div m-icon [iconName]="'check.svg'"></div>
+        Confirmar
+      </button>
     </div>
   </div>
 </app-modal>
