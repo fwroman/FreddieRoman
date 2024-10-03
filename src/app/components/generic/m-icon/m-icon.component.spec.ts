@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContextMenuComponent } from './context-menu.component';
+import { MIconComponent } from './m-icon.component';
 
-describe('ContextMenuComponent', () => {
-  let component: ContextMenuComponent;
-  let fixture: ComponentFixture<ContextMenuComponent>;
+describe('MIconComponent', () => {
+  let component: MIconComponent;
+  let fixture: ComponentFixture<MIconComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ContextMenuComponent]
+      imports: [MIconComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ContextMenuComponent);
+    fixture = TestBed.createComponent(MIconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

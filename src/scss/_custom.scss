@@ -2,13 +2,28 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 10px;
+  line-height: 18px;
   font-family: $generic-font-family;
   font-optical-sizing: auto;
-  font-weight: 600;
   font-style: normal;
   overflow-x: hidden;
+  color: $generic-font-color;
+
+  @media (min-width: $sm) {
+    font-size: 11px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $md) {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  @media (min-width: $lg) {
+    font-size: 14px;
+    line-height: 22px;
+  }
 }
 
 body {
@@ -22,14 +37,465 @@ body {
     flex-direction: column;
     flex: 1 0 auto;
 
-    router-outlet {
-      flex: 0;
-    }
-
-    > * {
+    main {
       flex: 1;
       display: flex;
       flex-direction: column;
+
+      nav-bar {
+        flex: 0;
+      }
+
+      .f-router-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: $generic-background-color;
+        padding: 2rem 1.5rem;
+
+        @media (min-width: $sm) {
+          padding: 2.5rem 2rem;
+        }
+
+        @media (min-width: $lg) {
+          padding: 3.5rem 3rem;
+        }
+
+        router-outlet {
+          flex: 0;
+        }
+
+        > * {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+      }
     }
+  }
+}
+
+h1 {
+  font-size: 1.4rem;
+
+  @media (min-width: $sm) {
+    font-size: 1.6rem;
+  }
+
+  @media (min-width: $md) {
+    font-size: 1.8rem;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $generic-font-color;
+}
+
+.f-position-relative {
+  position: relative;
+}
+
+.f-navbar {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 7px 14px 0px $generic-shadow-color;
+
+  &__logo {
+    color: $brand-color;
+    font-size: 1.3rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__logo-icon {
+    display: flex;
+    align-items: center;
+
+    .m-icon svg {
+      width: 1.75em;
+      height: 1.75em;
+    }
+  }
+}
+
+.f-brand-btn {
+  border: none;
+  width: 110px;
+  height: 25px;
+  background-color: $brand-background-color;
+  font-weight: 600;
+  font-size: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:active,
+  &:focus {
+    outline: 0.14rem solid $brand-color;
+  }
+
+  &--secondary {
+    background-color: $brand-background-color-sec;
+  }
+
+  @media (min-width: $sm) {
+    width: 115px;
+    height: 30px;
+    font-size: 11px;
+  }
+
+  @media (min-width: $md) {
+    width: 120px;
+    height: 35px;
+    font-size: 12px;
+  }
+}
+
+.f-icon-btn {
+  width: 25px;
+  height: 25px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: transparent;
+
+  &:active,
+  &:focus {
+    outline: 0.14rem solid $brand-background-color;
+  }
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .m-icon svg {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+}
+
+.f-generic-input {
+  width: 160px;
+  height: 20px;
+  font-size: 10px;
+  background-color: #fff;
+  border: 1px solid $generic-border-color;
+  border-radius: 5px;
+
+  &:active,
+  &:focus {
+    outline: 0.13rem solid $brand-color;
+  }
+
+  @media (min-width: $sm) {
+    width: 170px;
+    height: 23px;
+    font-size: 11px;
+  }
+
+  @media (min-width: $md) {
+    width: 180px;
+    height: 25px;
+    font-size: 12px;
+  }
+
+  &--short {
+    width: 60px;
+    height: 25px;
+  }
+}
+
+.f-form__control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  label {
+    font-weight: 600;
+  }
+}
+
+.f-contextual-menu {
+  position: absolute;
+  border-radius: 3px;
+  border: 1px solid $generic-border-color;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease-out;
+  transform: scale(0);
+  width: 105px;
+
+  @media (min-width: $sm) {
+    width: 110px;
+  }
+
+  @media (min-width: $md) {
+    width: 120px;
+  }
+
+  &--show {
+    transition: all 0.3s ease;
+    transform: scale(100%);
+  }
+
+  &__item {
+    transition: all 0.3s ease;
+    padding: 0.3rem 1.5rem;
+    border-bottom: 1px solid $generic-border-color;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $generic-background-color;
+    }
+
+    &:last-child {
+      border-bottom: transparent;
+    }
+  }
+}
+
+.f-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: black, $alpha: 0.4);
+  transition: all 0.2s ease;
+  transform: translateY(-100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--show {
+    transform: translateY(0);
+  }
+
+  &__container {
+    width: 63vw;
+    border-radius: 5px;
+    background-color: white;
+    padding: 2rem 1.5rem;
+
+    @media (min-width: $sm) {
+      width: 50vw;
+    }
+
+    @media (min-width: $md) {
+      width: 40vw;
+    }
+
+    @media (min-width: $lg) {
+      width: 30vw;
+    }
+  }
+}
+
+.f-list {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  &__task-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+
+    .f-generic-input {
+      order: 1;
+    }
+
+    @media (min-width: $sm) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .f-generic-input {
+        order: 0;
+      }
+    }
+  }
+
+  &__wrapper {
+    padding: 0.75rem 1.5rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media (min-width: $sm) {
+      padding: 1rem 2rem;
+    }
+  }
+
+  &__body {
+    display: none;
+
+    @media (min-width: $md) {
+      display: grid;
+      grid-template-columns: auto auto auto auto auto 4rem;
+    }
+
+    @media (min-width: $lg) {
+      grid-template-columns: auto auto auto auto auto 6rem;
+    }
+
+    &--mobile {
+      display: grid;
+      grid-template-columns: 50% 50%;
+
+      @media (min-width: $md) {
+        display: none;
+      }
+    }
+  }
+
+  &__h-item,
+  &__item {
+    border-bottom: 1px solid $generic-border-color;
+    padding: 0.5rem 1.5rem;
+  }
+
+  &__item {
+    &--icon {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+
+      @media (min-width: $md) {
+        justify-content: center;
+      }
+
+      .f-contextual-menu {
+        transform-origin: top left;
+        left: 2.75rem;
+        top: 50%;
+
+        @media (min-width: $md) {
+          transform-origin: top right;
+          left: unset;
+          right: 50%;
+        }
+
+        &--show {
+          transition: all 0.3s ease;
+          transform: scale(100%);
+          transform-origin: bottom right;
+
+          @media (min-width: $md) {
+            transform-origin: bottom left;
+          }
+        }
+      }
+    }
+  }
+
+  &__h-item {
+    font-weight: bold;
+    background-color: $generic-background-color;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+}
+
+.f-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+
+    h1 {
+      text-align: center;
+    }
+  }
+
+  &__body {
+    padding: 1.5rem 2rem 0.5rem 2rem;
+    display: grid;
+    grid-template-columns: auto;
+    grid-row-gap: 1.75rem;
+
+    .f-form__control {
+      .f-generic-input {
+        width: 100%;
+      }
+    }
+
+    @media (min-width: $sm) {
+      grid-template-columns: auto auto;
+      grid-column-gap: 2.5rem;
+
+      .f-form__control {
+        .f-generic-input {
+          width: inherit;
+        }
+      }
+    }
+
+    @media (min-width: $md) {
+      grid-column-gap: 2.5rem;
+    }
+  }
+
+  &__button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3.5rem 1.5rem;
+  }
+}
+
+.f-delete-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+
+  &__title {
+    font-size: 1.23rem;
+
+    @media (min-width: $sm) {
+      font-size: 1.28rem;
+    }
+
+    @media (min-width: $md) {
+      font-size: 1.23rem;
+    }
+
+    @media (min-width: $lg) {
+      font-size: 1.15rem;
+    }
+  }
+
+  &__btn-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid $generic-border-color;
   }
 }

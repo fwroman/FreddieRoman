@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { MIconComponent } from '../m-icon/m-icon.component';
 
 @Component({
-  selector: 'app-nav-bar',
+  selector: 'nav-bar',
   standalone: true,
-  imports: [],
+  imports: [RouterModule, MIconComponent],
   templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.scss'
+  styleUrl: './nav-bar.component.scss',
 })
-export class NavBarComponent {
-
-}
+export class NavBarComponent {}

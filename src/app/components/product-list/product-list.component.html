@@ -1,1 +1,148 @@
-<p>product-list works!</p>
+<div class="f-list f-list__container">
+  <div class="f-list__task-bar">
+    <input type="text" class="f-generic-input" placeholder="search..." />
+
+    <button class="f-brand-btn" [routerLink]="'/create-product'">
+      Agregar
+    </button>
+  </div>
+
+  <div class="f-list__wrapper">
+    <div class="f-list__body">
+      <div class="f-list__h-item">Logo</div>
+      <div class="f-list__h-item">Nombre del Producto</div>
+      <div class="f-list__h-item">Descripción</div>
+      <div class="f-list__h-item">Fecha de liberación</div>
+      <div class="f-list__h-item">Fecha de reestructuración</div>
+      <div class="f-list__h-item"></div>
+
+      <ng-container *ngFor="let product of productList">
+        <div class="f-list__item">{{ product.logo }}</div>
+        <div class="f-list__item">{{ product.name }}</div>
+        <div class="f-list__item">{{ product.description }}</div>
+        <div class="f-list__item">{{ product.releaseDate }}</div>
+        <div class="f-list__item">
+          {{ product.revisionDate }}
+        </div>
+        <div class="f-list__item f-list__item--icon">
+          <button
+            class="f-icon-btn"
+            (click)="product.showContextualMenu = true"
+            (blur)="hideContextMenu(product)"
+          >
+            <div
+              m-icon
+              [iconName]="'options.svg'"
+              class="f-icon-btn__icon"
+            ></div>
+          </button>
+
+          <div
+            class="f-contextual-menu"
+            [ngClass]="{
+              'f-contextual-menu--show': product.isContextMenuShown
+            }"
+          >
+            <a class="f-contextual-menu__item" [routerLink]="'/update-product'">
+              Editar
+            </a>
+            <div
+              class="f-contextual-menu__item"
+              (click)="selectedProduct = product; showHideDeleteModal(true)"
+            >
+              Eliminar
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="f-list__body f-list__body--mobile">
+      <ng-container *ngFor="let product of productList">
+        <div class="f-list__h-item">Logo</div>
+        <div class="f-list__item">{{ product.logo }}</div>
+
+        <div class="f-list__h-item">Nombre del Producto</div>
+        <div class="f-list__item">{{ product.name }}</div>
+
+        <div class="f-list__h-item">Descripción</div>
+        <div class="f-list__item">{{ product.description }}</div>
+
+        <div class="f-list__h-item">Fecha de liberación</div>
+        <div class="f-list__item">{{ product.releaseDate }}</div>
+
+        <div class="f-list__h-item">Fecha de reestructuración</div>
+        <div class="f-list__item">
+          {{ product.revisionDate }}
+        </div>
+
+        <div class="f-list__h-item"></div>
+        <div class="f-list__item f-list__item--icon">
+          <button
+            class="f-icon-btn"
+            (click)="product.showContextualMenu = true"
+            (blur)="hideContextMenu(product)"
+          >
+            <div
+              m-icon
+              [iconName]="'options.svg'"
+              class="f-icon-btn__icon"
+            ></div>
+          </button>
+
+          <div
+            class="f-contextual-menu"
+            [ngClass]="{
+              'f-contextual-menu--show': product.isContextMenuShown
+            }"
+          >
+            <a class="f-contextual-menu__item" [routerLink]="'/update-product'">
+              Editar
+            </a>
+            <div
+              class="f-contextual-menu__item"
+              (click)="selectedProduct = product; showHideDeleteModal(true)"
+            >
+              Eliminar
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="f-list__footer">
+      <span class="f-list__results">
+        {{
+          productList.length +
+            " Resultado" +
+            (productList.length > 1 ? "s" : "")
+        }}
+      </span>
+
+      <select class="f-generic-input f-generic-input--short">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<app-modal>
+  <div class="f-delete-dialog">
+    <p class="f-delete-dialog__title">
+      ¿Estás seguro de eliminar el producto <b>{{ selectedProduct?.name }}</b
+      >?
+    </p>
+
+    <div class="f-delete-dialog__btn-group">
+      <button
+        class="f-brand-btn f-brand-btn--secondary"
+        (click)="showHideDeleteModal(false)"
+      >
+        Cancelar
+      </button>
+      <button class="f-brand-btn">Confirmar</button>
+    </div>
+  </div>
+</app-modal>

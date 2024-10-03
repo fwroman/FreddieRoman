@@ -6,8 +6,8 @@ export class FinancialProduct extends Product {
     _name: string,
     _description: string,
     private _logo: string,
-    private _dateRelease: Date,
-    private _dateRevision: Date
+    private _releaseDate: Date,
+    private _revisionDate: Date
   ) {
     super(_id, _name, _description);
   }
@@ -19,27 +19,27 @@ export class FinancialProduct extends Product {
 
   /** Gets the release date of the product. */
   get releaseDate(): string {
-    return `${this._dateRelease.getFullYear()}-${
-      this._dateRelease.getMonth() + 1 < 10
-        ? '0' + (this._dateRelease.getMonth() + 1)
-        : this._dateRelease.getMonth() + 1
+    return `${this._releaseDate.getFullYear()}-${
+      this._releaseDate.getMonth() + 1 < 10
+        ? '0' + (this._releaseDate.getMonth() + 1)
+        : this._releaseDate.getMonth() + 1
     }-${
-      this._dateRelease.getDate() < 10
-        ? '0' + this._dateRelease.getDate()
-        : this._dateRelease.getDate()
+      this._releaseDate.getDate() < 10
+        ? '0' + this._releaseDate.getDate()
+        : this._releaseDate.getDate()
     }`;
   }
 
   /** Gets the revision date of the product. */
   get revisionDate(): string {
-    return `${this._dateRevision.getFullYear()}-${
-      this._dateRevision.getMonth() + 1 < 10
-        ? '0' + (this._dateRevision.getMonth() + 1)
-        : this._dateRevision.getMonth() + 1
+    return `${this._revisionDate.getFullYear()}-${
+      this._revisionDate.getMonth() + 1 < 10
+        ? '0' + (this._revisionDate.getMonth() + 1)
+        : this._revisionDate.getMonth() + 1
     }-${
-      this._dateRevision.getDate() < 10
-        ? '0' + this._dateRevision.getDate()
-        : this._dateRevision.getDate()
+      this._revisionDate.getDate() < 10
+        ? '0' + this._revisionDate.getDate()
+        : this._revisionDate.getDate()
     }`;
   }
 }

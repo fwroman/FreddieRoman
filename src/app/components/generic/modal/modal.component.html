@@ -1,1 +1,8 @@
-<p>modal works!</p>
+<div
+  class="f-modal"
+  [ngClass]="{ 'f-modal--show': genericSubjectService.modalObservable | async }"
+>
+  <div class="f-modal__container">
+    <ng-content></ng-content>
+  </div>
+</div>

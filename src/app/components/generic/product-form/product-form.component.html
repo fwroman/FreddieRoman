@@ -1,1 +1,41 @@
-<p>product-form works!</p>
+<div class="f-form__wrapper">
+  <h1>Formulario de {{ !update ? "Registro" : " Edición" }}</h1>
+  <hr width="98%" />
+
+  <div class="f-form__body">
+    <div class="f-form__control">
+      <label>ID</label>
+      <input type="text" class="f-generic-input" />
+    </div>
+
+    <div class="f-form__control">
+      <label>Name</label>
+      <input type="text" class="f-generic-input" />
+    </div>
+
+    <div class="f-form__control">
+      <label>Descripción</label>
+      <input type="text" class="f-generic-input" />
+    </div>
+
+    <div class="f-form__control">
+      <label>Logo</label>
+      <input type="text" class="f-generic-input" />
+    </div>
+
+    <div class="f-form__control">
+      <label>Fecha liberación</label>
+      <input type="text" class="f-generic-input" />
+    </div>
+
+    <div class="f-form__control">
+      <label>Fecha Revisión</label>
+      <input type="text" class="f-generic-input" />
+    </div>
+  </div>
+
+  <div class="f-form__button-group">
+    <button class="f-brand-btn f-brand-btn--secondary">Reiniciar</button>
+    <button class="f-brand-btn">Enviar</button>
+  </div>
+</div>
