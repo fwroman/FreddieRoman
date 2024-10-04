@@ -365,6 +365,59 @@ a {
   }
 }
 
+.f-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 70vw;
+
+  @media (min-width: $sm) {
+    width: 60vw;
+  }
+
+  @media (min-width: $md) {
+    width: 45vw;
+  }
+
+  @media (min-width: $xl) {
+    width: 35vw;
+  }
+
+  &__wrapper {
+    background-color: $success-background-color;
+    border: 1px solid $success-color;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+
+    &--error {
+      border-color: $error-color;
+      background-color: $error-background-color;
+
+      .f-toast__icon {
+        color: $success-color;
+      }
+    }
+  }
+
+  &__icon {
+    color: $success-color;
+
+    .m-icon svg {
+      width: 2em;
+      height: 2em;
+    }
+  }
+
+  &__message {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+}
+
 .f-list {
   &__container {
     display: flex;

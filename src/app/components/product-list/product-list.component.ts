@@ -9,6 +9,7 @@ import { ModalComponent } from '../generic/modal/modal.component';
 import { MIconComponent } from '../generic/m-icon/m-icon.component';
 import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs';
+import { ToastTypes } from '../../dto/productDto';
 
 @Component({
   selector: 'app-product-list',
@@ -41,9 +42,20 @@ export class ProductListComponent implements OnInit {
 
   /** Deletes the selected product. */
   public async deleteProduct() {
-    await this.productService.deleteProductById(this.selectedProduct?.id!);
-    this.showHideDeleteModal(false);
-    await this.getProducts();
+    try {
+      await this.productService.deleteProductById(this.selectedProduct?.id!);
+      this.showHideDeleteModal(false);
+      await this.getProducts();
+      this.genericSubjectService.showHideToast({
+        toastType: ToastTypes.Success,
+        message: 'Producto eliminado correctamente.',
+      });
+    } catch (err) {
+      this.genericSubjectService.showHideToast({
+        toastType: ToastTypes.Error,
+        message: err as string,
+      });
+    }
   }
 
   /** Get the list of products. */

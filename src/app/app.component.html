@@ -5,3 +5,11 @@
     <router-outlet></router-outlet>
   </div>
 </main>
+
+<div
+  *ngIf="toastData"
+  toast
+  [type]="toastData!.toastType"
+  [message]="toastData!.message"
+  class="f-toast"
+></div>

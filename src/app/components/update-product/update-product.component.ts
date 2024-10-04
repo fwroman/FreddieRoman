@@ -4,6 +4,7 @@ import { FinancialProduct } from '../../models/financialProduct';
 import { Subscription } from 'rxjs';
 import { GenericSubjectService } from '../../subjects/generic-subject.service';
 import { ProductService } from '../../services/product.service';
+import { ToastTypes } from '../../dto/productDto';
 
 @Component({
   selector: 'app-update-product',
@@ -25,7 +26,18 @@ export class UpdateProductComponent implements OnInit, OnDestroy {
 
   /** Submits the form to update a new product. */
   public async submit(_event: boolean) {
-    await this.productService.editProduct(this.product);
+    try {
+      await this.productService.editProduct(this.product);
+      this.genericSubjectService.showHideToast({
+        toastType: ToastTypes.Success,
+        message: 'Producto actualizado correctamente.',
+      });
+    } catch (err) {
+      this.genericSubjectService.showHideToast({
+        toastType: ToastTypes.Error,
+        message: err as string,
+      });
+    }
   }
 
   ngOnInit(): void {

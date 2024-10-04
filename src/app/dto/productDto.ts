@@ -1,3 +1,8 @@
+export enum ToastTypes {
+  Success = 'success',
+  Error = 'error',
+}
+
 export interface ApiPostResponse {
   message: string;
   data: ApiProduct;
