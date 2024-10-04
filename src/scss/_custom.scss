@@ -479,6 +479,27 @@ a {
     align-items: center;
     padding: 0.5rem 0;
   }
+
+  &__paginator {
+    display: flex;
+    gap: 1rem;
+
+    .f-icon-btn {
+      width: fit-content;
+      height: fit-content;
+      padding: 0;
+
+      .m-icon svg {
+        width: 1.6em !important;
+        height: 1.6em !important;
+
+        @media (min-width: $md) {
+          width: 1.8em !important;
+          height: 1.8em !important;
+        }
+      }
+    }
+  }
 }
 
 .f-form {

@@ -1,6 +1,12 @@
 <div class="f-list f-list__container">
   <div class="f-list__task-bar">
-    <input type="text" class="f-generic-input" placeholder="search..." />
+    <input
+      type="text"
+      class="f-generic-input"
+      placeholder="search..."
+      [(ngModel)]="filterString"
+      [ngModelOptions]="{ standalone: true }"
+    />
 
     <button class="f-brand-btn" [routerLink]="'/create-product'">
       <div m-icon [iconName]="'add.svg'"></div>
@@ -17,7 +23,7 @@
       <div class="f-list__h-item">Fecha de reestructuración</div>
       <div class="f-list__h-item"></div>
 
-      <ng-container *ngFor="let product of productList">
+      <ng-container *ngFor="let product of paginatedList">
         <div class="f-list__item">
           <img [src]="product.logo" class="f-list__item-img" />
         </div>
@@ -75,7 +81,7 @@
     </div>
 
     <div
-      *ngFor="let product of productList"
+      *ngFor="let product of paginatedList"
       class="f-list__body f-list__body--mobile"
     >
       <div class="f-list__h-item">Logo</div>
@@ -140,13 +146,46 @@
     <div class="f-list__footer">
       <span class="f-list__results">
         {{
-          productList.length +
+          filteredList.length +
             " Resultado" +
-            (productList.length > 1 ? "s" : "")
+            (filteredList.length > 1 ? "s" : "")
         }}
       </span>
 
-      <select class="f-generic-input f-generic-input--short">
+      <div class="f-list__paginator" *ngIf="numberOfPages">
+        <button
+          class="f-icon-btn"
+          *ngIf="currentPage > 0"
+          (click)="currentPage = currentPage - 1"
+        >
+          <div
+            class="f-icon-btn"
+            m-icon
+            [iconName]="'prev.svg'"
+            class="f-icon-btn__icon"
+          ></div>
+        </button>
+
+        <button
+          class="f-icon-btn"
+          *ngIf="currentPage < numberOfPages - 1"
+          (click)="currentPage = currentPage + 1"
+        >
+          <div
+            class="f-icon-btn"
+            m-icon
+            [iconName]="'next.svg'"
+            class="f-icon-btn__icon"
+          ></div>
+        </button>
+      </div>
+
+      <select
+        class="f-generic-input f-generic-input--short"
+        [(ngModel)]="itemsPerPage"
+        [ngModelOptions]="{ standalone: true }"
+        (change)="currentPage = 0"
+      >
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="20">20</option>
