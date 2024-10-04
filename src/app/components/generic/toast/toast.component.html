@@ -1,0 +1,11 @@
+<div
+  class="f-toast__wrapper"
+  [ngClass]="{
+    'f-toast__wrapper--error': type === toastTypes.Error
+  }"
+>
+  <div m-icon [iconName]="'check.svg'" class="f-toast__icon"></div>
+  <p class="f-toast__message">
+    {{ message }}
+  </p>
+</div>
