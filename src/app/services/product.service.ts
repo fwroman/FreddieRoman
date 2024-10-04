@@ -10,6 +10,20 @@ export class ProductService {
   constructor(private productControllerService: ProductControllerService) {}
 
   /**
+   * Verifies if a product exists with the given ID.
+   * @returns an promise with a boolean value.
+   */
+  public productExistsById(productId: string): Promise<boolean> {
+    try {
+      return lastValueFrom(
+        this.productControllerService.productExistsById(productId)
+      );
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  /**
    * Creates a new product.
    * @returns a promise a FinancialProduct object.
    */

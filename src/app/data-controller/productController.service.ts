@@ -12,6 +12,15 @@ export class ProductControllerService {
   constructor(private genericClientService: GenericClientService) {}
 
   /**
+   * Verifies if a product exists with the given ID.
+   * @returns an observable with a boolean value.
+   */
+  public productExistsById(productId: string): Observable<boolean> {
+    const url = `${environment.baseApiUrl}/bp/products/verification/${productId}`;
+    return this.genericClientService.genericHttpRequestGet<boolean>(url);
+  }
+
+  /**
    * Creates a new product.
    * @returns an observable with FinancialProduct object.
    */

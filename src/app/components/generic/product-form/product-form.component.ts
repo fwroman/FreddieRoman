@@ -13,6 +13,7 @@ import { FinancialProduct } from '../../../models/financialProduct';
 import { FormsModule, NgForm } from '@angular/forms';
 import { formatDate } from '../../../utils/formatterts';
 import { CommonModule } from '@angular/common';
+import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: '[product-form]',
@@ -22,25 +23,34 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product-form.component.scss',
 })
 export class ProductFormComponent implements OnInit, OnChanges {
-  @Input() product!: FinancialProduct;
+  @Input() product: FinancialProduct;
+  @Input() update!: boolean;
   @Input() resetProduct: boolean | undefined;
   @Output() isProductFilledIn = new EventEmitter<boolean>();
   @ViewChild('prodForm') productForm!: NgForm;
   private _minDate = new Date();
   private initialProduct!: FinancialProduct;
+  public idExists = false;
 
-  constructor() {
+  constructor(private productService: ProductService) {
     this.product = new FinancialProduct('', '', '', '');
   }
 
   ngOnInit(): void {
     this.initialProduct = new FinancialProduct(
-      this.product.id,
-      this.product.name,
-      this.product.description,
-      this.product.logo,
-      this.product.releaseDate,
-      this.product.revisionDate
+      this.product?.id ?? '',
+      this.product?.name ?? '',
+      this.product?.description ?? '',
+      this.product?.logo ?? '',
+      this.product?.releaseDate ?? '',
+      this.product?.revisionDate ?? ''
+    );
+  }
+
+  /** Verifies if the product ID is available or not. */
+  public async verifyId() {
+    this.idExists = await this.productService.productExistsById(
+      this.product.id
     );
   }
 
@@ -56,10 +66,10 @@ export class ProductFormComponent implements OnInit, OnChanges {
 
   /** Sets the value of the product's revisionDate automatically. */
   public setRevisionDate() {
-    const date = new Date(this.product.releaseDate!);
+    const date = new Date(this.product?.releaseDate!);
     date.setFullYear(date.getFullYear() + 1);
     date.setDate(date.getDate() + 1);
-    this.product.revisionDate = formatDate(date);
+    this.product!.revisionDate = formatDate(date);
   }
 
   /** Formats the string value of the min date for validation. */

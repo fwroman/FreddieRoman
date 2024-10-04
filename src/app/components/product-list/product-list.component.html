@@ -120,7 +120,11 @@
             'f-contextual-menu--show': product.isContextMenuShown
           }"
         >
-          <a class="f-contextual-menu__item" [routerLink]="'/update-product'">
+          <a
+            class="f-contextual-menu__item"
+            [routerLink]="'/update-product'"
+            (click)="sendProduct(product)"
+          >
             <div
               m-icon
               [iconName]="'edit.svg'"

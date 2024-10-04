@@ -24,7 +24,6 @@ export class UpdateProductComponent implements OnInit, OnDestroy {
       this.genericSubjectService.updateProductObservable.subscribe((prod) => {
         if (prod) {
           this.product = prod;
-          this.product.newRecord = false;
         }
       });
   }

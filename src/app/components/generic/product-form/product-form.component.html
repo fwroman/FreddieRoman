@@ -1,5 +1,5 @@
 <div class="f-form__wrapper">
-  <h1>Formulario de {{ product.isNewRecord ? "Registro" : " Edición" }}</h1>
+  <h1>Formulario de {{ !update ? "Registro" : " Edición" }}</h1>
   <hr width="98%" />
 
   <form #prodForm="ngForm" class="f-form__body">
@@ -11,15 +11,20 @@
         maxlength="10"
         autocomplete="off"
         class="f-generic-input"
+        [ngClass]="{ 'f-generic-input--invalid': idExists }"
         [(ngModel)]="product.id"
+        (change)="verifyId()"
         name="id"
         #id="ngModel"
-        [disabled]="product.isNewRecord == false"
+        [disabled]="update"
         required
       />
 
-      <span *ngIf="id.touched && id.invalid" class="f-form__input-error">
-        ID no válido!
+      <span
+        *ngIf="(id.touched && id.invalid) || idExists"
+        class="f-form__input-error"
+      >
+        {{ idExists ? "ID existente!" : "ID no válido!" }}
       </span>
     </div>
 
@@ -122,7 +127,7 @@
     </button>
     <button
       class="f-brand-btn"
-      [disabled]="prodForm.invalid"
+      [disabled]="prodForm.invalid || idExists"
       (click)="sendProduct()"
     >
       <div m-icon [iconName]="'check.svg'"></div>

@@ -226,6 +226,10 @@ a {
   border: 1px solid $generic-border-color;
   border-radius: 5px;
 
+  &--invalid {
+    border-color: $error-color !important;
+  }
+
   &:active,
   &:focus {
     outline: 0.13rem solid $brand-color;
@@ -282,6 +286,7 @@ a {
   transition: all 0.2s ease-out;
   transform: scale(0);
   width: 105px;
+  z-index: 5;
 
   @media (min-width: $sm) {
     width: 110px;

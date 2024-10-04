@@ -1,14 +1,11 @@
 export abstract class Product {
   private _showContextualMenu!: boolean;
-  private _newRecord!: boolean;
 
   constructor(
     private _id: string,
     private _name: string,
     private _description: string
-  ) {
-    this._newRecord = false;
-  }
+  ) {}
 
   /** Sets the id of the product. */
   set id(id: string) {
@@ -50,16 +47,6 @@ export abstract class Product {
 
   /** Checks whether product's contextual menu is shown. */
   get isContextMenuShown(): boolean {
-    return this._showContextualMenu;
-  }
-
-  /** Sets the value of the flag _newRecord. */
-  set newRecord(show: boolean) {
-    this._showContextualMenu = show;
-  }
-
-  /** Checks whether product's contextual menu is shown. */
-  get isNewRecord(): boolean {
     return this._showContextualMenu;
   }
 }
