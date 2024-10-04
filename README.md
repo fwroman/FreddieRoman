@@ -32,7 +32,6 @@ npm install
 In order to start the frontend client you will have to run ng serve to deploy it over the port 4200 by default.
 
 ```
-cd angular
 ng serve
 ```
 
