@@ -1,1 +1,7 @@
-<div product-form class="f-form" [product]="product" [update]="true"></div>
+<div
+  product-form
+  class="f-form"
+  [product]="product"
+  [update]="true"
+  (isProductFilledIn)="submit($event)"
+></div>

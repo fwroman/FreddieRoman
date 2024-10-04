@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GenericClientService } from '../api-client/genericClient.service';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { ApiGetResponse, ApiPostResponse, ApiProduct } from '../dto/productDto';
 import { FinancialProduct } from '../models/financialProduct';
 import { environment } from '../../environments/environment.development';
@@ -10,6 +10,44 @@ import { environment } from '../../environments/environment.development';
 })
 export class ProductControllerService {
   constructor(private genericClientService: GenericClientService) {}
+
+  /**
+   * Deletes a product by ID.
+   * @returns an observable with a unknown value.
+   */
+  public deleteProductById(productId: string): Observable<unknown> {
+    const url = `${environment.baseApiUrl}/bp/products/${productId}`;
+    return this.genericClientService
+      .genericHttpRequestDelete<unknown>(url)
+      .pipe(
+        catchError((err) => {
+          throw err?.error?.message;
+        })
+      );
+  }
+
+  /**
+   * Updates an existing product.
+   * @returns an observable with FinancialProduct object.
+   */
+  public updateProductClient(
+    product: FinancialProduct
+  ): Observable<FinancialProduct> {
+    const url = `${environment.baseApiUrl}/bp/products/${product.id}`;
+    return this.genericClientService
+      .genericHttpRequestPut<ApiProduct, ApiPostResponse>(
+        url,
+        this.mapApiProduct(product)
+      )
+      .pipe(
+        map((response) => {
+          return this.mapFinancialProduct(response.data);
+        }),
+        catchError((err) => {
+          throw err?.error?.message;
+        })
+      );
+  }
 
   /**
    * Verifies if a product exists with the given ID.
@@ -35,8 +73,10 @@ export class ProductControllerService {
       )
       .pipe(
         map((response) => {
-          console.log('response.message', response.message);
           return this.mapFinancialProduct(response.data);
+        }),
+        catchError((err) => {
+          throw err?.error?.message;
         })
       );
   }
@@ -49,7 +89,12 @@ export class ProductControllerService {
     const url = `${environment.baseApiUrl}/bp/products`;
     return this.genericClientService
       .genericHttpRequestGet<ApiGetResponse>(url)
-      .pipe(map((response) => this.mapProductList(response.data)));
+      .pipe(
+        map((response) => this.mapProductList(response.data)),
+        catchError((err) => {
+          throw err?.error?.message;
+        })
+      );
   }
 
   /**

@@ -10,6 +10,34 @@ export class ProductService {
   constructor(private productControllerService: ProductControllerService) {}
 
   /**
+   * Deletes a product by ID.
+   * @returns an observable with a unknown value.
+   */
+  public deleteProductById(productId: string): Promise<unknown> {
+    try {
+      return lastValueFrom(
+        this.productControllerService.deleteProductById(productId)
+      );
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  /**
+   * Edits an existing product.
+   * @returns a promise a FinancialProduct object.
+   */
+  public editProduct(product: FinancialProduct): Promise<FinancialProduct> {
+    try {
+      return lastValueFrom(
+        this.productControllerService.updateProductClient(product)
+      );
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  /**
    * Verifies if a product exists with the given ID.
    * @returns an promise with a boolean value.
    */

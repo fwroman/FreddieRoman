@@ -3,6 +3,7 @@ import { ProductFormComponent } from '../generic/product-form/product-form.compo
 import { FinancialProduct } from '../../models/financialProduct';
 import { Subscription } from 'rxjs';
 import { GenericSubjectService } from '../../subjects/generic-subject.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-update-product',
@@ -15,8 +16,16 @@ export class UpdateProductComponent implements OnInit, OnDestroy {
   public product!: FinancialProduct;
   private subscription!: Subscription;
 
-  constructor(private genericSubjectService: GenericSubjectService) {
+  constructor(
+    private productService: ProductService,
+    private genericSubjectService: GenericSubjectService
+  ) {
     this.product = new FinancialProduct('', '', '', '');
+  }
+
+  /** Submits the form to update a new product. */
+  public async submit(_event: boolean) {
+    await this.productService.editProduct(this.product);
   }
 
   ngOnInit(): void {

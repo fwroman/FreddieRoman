@@ -36,6 +36,18 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    await this.getProducts();
+  }
+
+  /** Deletes the selected product. */
+  public async deleteProduct() {
+    await this.productService.deleteProductById(this.selectedProduct?.id!);
+    this.showHideDeleteModal(false);
+    await this.getProducts();
+  }
+
+  /** Get the list of products. */
+  async getProducts(): Promise<void> {
     this.productList = await this.productService.listProducts();
   }
 
