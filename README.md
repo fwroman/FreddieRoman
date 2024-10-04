@@ -1,27 +1,41 @@
-# Test
+# Frontend Web Aplication Test
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4.
+This project is a frontend implementation to simulate the Financial Product Management.
 
-## Development server
+## Getting started 🚀
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This instructions will allow you to get a copy of this project for your local computer for development and testing purposes.
 
-## Code scaffolding
+Take a look in the **Deployment** section to know how to let the project get started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Pre requirements 📋
 
-## Build
+First thing first, you will need to prepare your local node.js environment which will allow you to deploy the frontend project.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Instalation 🔧
+
+Once you have your local environment ready, you will need to install @angular/cli in order to start up the frontend project.
+
+```
+npm install -g @angular/cli
+```
+
+After you've already cloned this project, you will need to install all the dependencies.
+
+```
+cd FreddieRoman
+npm install
+```
+
+## Deployment 📦
+
+In order to start the frontend client you will have to run ng serve to deploy it over the port 4200 by default.
+
+```
+cd angular
+ng serve
+```
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Run `npm run test` to execute the unit tests via [Jest].
